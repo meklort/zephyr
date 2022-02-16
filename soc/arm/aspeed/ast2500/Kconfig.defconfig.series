@@ -1,0 +1,16 @@
+#
+# Copyright (c) 2021 Weidmueller Interface GmbH & Co. KG
+# SPDX-License-Identifier: Apache-2.0
+#
+
+if SOC_SERIES_ASPEED
+
+rsource "Kconfig.defconfig.ast25*"
+
+config SOC_SERIES
+	default "ast2500"
+
+config MP_NUM_CPUS
+	default 1
+
+endif # SOC_SERIES_ASPEED

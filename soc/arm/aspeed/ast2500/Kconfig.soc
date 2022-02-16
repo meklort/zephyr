@@ -1,0 +1,18 @@
+#
+# Copyright (c) 2021 Weidmueller Interface GmbH & Co. KG
+# SPDX-License-Identifier: Apache-2.0
+#
+# Device data: comp.
+# https://www.xilinx.com/products/silicon-devices/soc/zynq-7000.html#productTable
+#
+
+choice
+	prompt "AST2500 SoC Selection"
+	depends on SOC_SERIES_ASPEED
+
+config SOC_ASPEED_2500
+	bool "AST2500"
+	help
+	  One ARM1176JZS core up to 800 MHz, 
+
+endchoice
