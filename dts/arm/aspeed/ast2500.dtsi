@@ -1,0 +1,52 @@
+/*
+ * Copyright (c) 2021 Weidmueller Interface GmbH & Co. KG
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+#include <mem.h>
+#include <arm/armv6.dtsi>
+#include <dt-bindings/interrupt-controller/arm-gic.h>
+
+/ {
+	soc {
+		interrupt-parent = <&gic>;
+
+		arch_timer: timer@f8f00200 {
+			compatible = "arm,armv8-timer";
+			status = "okay";
+			interrupt-names = "irq_0", "irq_1", "irq_2", "irq_3";
+			interrupts = <GIC_PPI 13 IRQ_TYPE_EDGE
+					IRQ_DEFAULT_PRIORITY>,
+				     <GIC_PPI 14 IRQ_TYPE_EDGE
+					IRQ_DEFAULT_PRIORITY>,
+				     <GIC_PPI 11 IRQ_TYPE_EDGE
+					IRQ_DEFAULT_PRIORITY>,
+				     <GIC_PPI 10 IRQ_TYPE_EDGE
+					IRQ_DEFAULT_PRIORITY>;
+			reg = <0xf8f00200 0x1C>;
+			label = "arch_timer";
+		};
+
+		gic: interrupt-controller@f8f01000 {
+			compatible = "arm,gic";
+			status = "okay";
+			reg = <0xf8f01000 0x1000>,
+				<0xf8f00100 0x100>;
+			interrupt-controller;
+			#interrupt-cells = <4>;
+			label = "gic";
+		};
+
+                uart5: uart@1e78400 {
+                        compatible = "ns16550";
+                        reg = <0x01e78400 0x0020>;
+                        status = "disabled";
+                        label = "console";
+                        current-speed = <115200>;
+                        clock-frequency = <1804800>;
+                        interrupts = <38 IRQ_TYPE_EDGE_RISING>;
+                        interrupt-parent = <&intc>;
+                };
+
+	};
+};
